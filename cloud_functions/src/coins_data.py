@@ -21,9 +21,8 @@ lg_client.setup_logging(log_level=logging.INFO)
 
 def get_coins_data(currency):
     try:
-        ref = db.reference('/')
-        supported_coins = ref.child('supported-coingecko').get()
-        supported_coins = list(supported_coins.values())
+        ref = db.reference('/supported-coingecko')
+        supported_coins = list(ref.get().values())
     except Exception as err:
         logging.error(f"An Error occured in get_market_data {err}")
         return None
