@@ -18,10 +18,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s:%(levelname)s:%(mess
 lg_client = cloudlogging.Client()
 lg_client.setup_logging(log_level=logging.INFO)
 
+SUPPORTED_COINS = '/supported-coingecko'
+
 
 def get_coins_data(currency):
     try:
-        ref = db.reference('/supported-coingecko')
+        ref = db.reference(SUPPORTED_COINS)
         supported_coins = list(ref.get().values())
     except Exception as err:
         logging.error(f"An Error occured in get_market_data {err}")
