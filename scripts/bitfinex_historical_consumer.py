@@ -5,11 +5,6 @@ import time
 import pandas as pd
 from bfxapi import Client
 
-bfx = Client(
-    API_KEY='kq9H6OgvM5s4hHUdA4gwvbjgBQHaflXxD0uiziM2OuO',
-    API_SECRET='c4VQP8ZTwzycUJZW3eeKPukv8IovpZ3mSHye1PnXjum'
-)
-
 _symbols = ['tETHUSD', 'tBTCUSD',
             'tEOSUSD', 'tXLMUSD',
             'tADAUSD', 'tXRPUSD',
