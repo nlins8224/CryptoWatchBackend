@@ -1,4 +1,4 @@
-from coins_data import get_coins_data, filter_coins_data, save_coins_data
+from coins_data import get_coins_data, filter_coins_data, save_coins_data, save_coins_data_live
 
 SUPPORTED_CURRENCY = 'usd'
 LIVE_COINS = '/live-coins'
@@ -10,7 +10,7 @@ def execute_coin_stream_1M(event, context):
     assets = get_coins_data(SUPPORTED_CURRENCY)
     assets = filter_coins_data(assets)
     print(assets)
-    save_coins_data(assets, LIVE_COINS)
+    save_coins_data_live(assets, LIVE_COINS)
     save_coins_data(assets, HISTORICAL_COINS_1M)
 
 
