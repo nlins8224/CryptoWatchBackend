@@ -1,13 +1,13 @@
 import json
 import logging
 
+from firebase_admin import db
+from google.cloud import logging as cloudlogging
 from pycoingecko import CoinGeckoAPI
 
 from Asset import Asset
-from google.cloud import logging as cloudlogging
-from firebase_admin import db
-
 from config import init_credentials, init_database
+from date_to_millis_UTC import date_to_millis_UTC
 
 init_credentials()
 init_database()
@@ -52,9 +52,8 @@ def filter_coins_data(data):
             entry['price_change_24h'],
             entry['price_change_percentage_24h'],
             entry['market_cap_change_24h'],
-            entry['last_updated'],
+            date_to_millis_UTC(entry['last_updated']),
         )
-
         assets.append(asset)
     return assets
 
@@ -63,7 +62,7 @@ def save_coins_data(data, path):
     ref = db.reference(path)
     for asset in data:
         try:
-            timestamp = asset.last_updated.split('.', 1)[0]
+            timestamp = asset.last_updated
             ref.child(asset.symbol).child(timestamp).set(json.loads(asset.to_json()))
         except Exception as err:
             logging.error(f"An error occured in save_coins_data {err} for {asset}")
@@ -78,5 +77,5 @@ def save_coins_data_latest(data, path):
             logging.error(f"An error occured in save_coins_data_live {err} for {asset}")
 
 
-def delete_old_data():
+def delete_old_data(path, cut_off_time):
     pass

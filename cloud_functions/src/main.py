@@ -5,6 +5,9 @@ LIVE_COINS = '/live-coins'
 HISTORICAL_COINS_1H = '/historical-coins-1H'
 HISTORICAL_COINS_1M = '/historical-coins-1M'
 
+# 24 Hours in milliseconds
+CUT_OFF_TIME_24H = 24 * 60 * 60 * 1000
+
 
 def execute_coin_batch_1M(event, context):
     assets = get_coins_data(SUPPORTED_CURRENCY)
