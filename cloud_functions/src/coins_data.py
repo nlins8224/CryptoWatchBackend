@@ -68,7 +68,7 @@ def save_coins_data(data, path):
             logging.error(f"An error occured in save_coins_data {err} for {asset}")
 
 
-def save_coins_data_live(data, path):
+def save_coins_data_latest(data, path):
     ref = db.reference(path)
     for asset in data:
         try:
