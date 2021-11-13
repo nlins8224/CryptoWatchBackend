@@ -58,23 +58,14 @@ def filter_coins_data(data):
     return assets
 
 
-def save_coins_data_live(data):
-    ref = db.reference('/')
-    for asset in data:
-        try:
-            ref.child('live-coins').child(asset.symbol).set(json.loads(asset.to_json()))
-        except Exception as err:
-            logging.error(f"An error occured in save_market_data_live {err} for {asset}")
-
-
-def save_coins_data_1H(data):
-    ref = db.reference('/historical-coins-1H')
+def save_coins_data(data, path):
+    ref = db.reference(path)
     for asset in data:
         try:
             timestamp = asset.last_updated.split('.', 1)[0]
             ref.child(asset.symbol).child(timestamp).set(json.loads(asset.to_json()))
         except Exception as err:
-            logging.error(f"An error occured in save_market_data_1H {err} for {asset}")
+            logging.error(f"An error occured in save_market_data {err} for {asset}")
 
 
 def delete_old_data():
