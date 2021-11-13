@@ -6,8 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
-backend/service_account_key.json
-backend/google_credentials.json
+service_account_key.json
+google_credentials.json
 .idea
 # Distribution / packaging
 .Python
@@ -130,6 +130,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/backend/terraform/.terraform.lock.hcl
-/backend/cloud_functions/src/app.yaml
-/backend/terraform/.terraform/
+/terraform/.terraform.lock.hcl
+/cloud_functions/src/app.yaml
+/terraform/.terraform/

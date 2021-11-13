@@ -4,7 +4,7 @@ provider "google" {
 }
 
 module "cloud_function" {
- source = "./modules/cloud_functions"
+ source = "modules\/cloud_functions"
  project = var.project
  function_name = "cloud_function"
  function_entry_point = "hello"
