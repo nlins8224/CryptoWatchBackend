@@ -7,10 +7,9 @@ from google.cloud import logging as cloudlogging
 from pycoingecko import CoinGeckoAPI
 
 from Asset import Asset
-from config import init_credentials, init_database
+from config import init_database
 from date_to_millis_UTC import date_to_millis_UTC
 
-init_credentials()
 init_database()
 
 cg = CoinGeckoAPI()
