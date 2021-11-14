@@ -85,7 +85,7 @@ def save_coins_data_latest(assets, path):
             logging.error(f"An error occured in save_coins_data_latest {err} for {asset}")
 
 
-def delete_old_data(path, cut_off_time_ms):
+def delete_old_coins_data(path, cut_off_time_ms):
     MS_IN_SECONDS = 1000
     supported_coins = get_supported_coins_sym()
     ref = db.reference(path)
