@@ -99,4 +99,7 @@ def delete_old_data(path, cut_off_time):
         timestamps = old_items_query.get().keys()
         if timestamps:
             updates = {timestamp: None for timestamp in timestamps}
-            ref.child(coin).update(updates)
+            try:
+                ref.child(coin).update(updates)
+            except Exception as err:
+                logging.error(f"An error occured in delete_old_data {err} for {coin}")
