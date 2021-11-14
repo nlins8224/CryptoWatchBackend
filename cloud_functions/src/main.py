@@ -5,7 +5,6 @@ LIVE_COINS = '/live-coins'
 HISTORICAL_COINS_1H = '/historical-coins-1H'
 HISTORICAL_COINS_1M = '/historical-coins-1M'
 
-# 12 Hours in milliseconds
 CUT_OFF_TIME_5D_AGO = 5 * 24 * 60 * 60 * 1000
 CUT_OFF_TIME_5Y_AGO = 5 * 365 * 24 * 60 * 60 * 1000
 
