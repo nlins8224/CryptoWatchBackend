@@ -32,14 +32,14 @@ def init_credentials():
 
 
 def init_database():
+    cred = None
+
     if MODE == 'LOCAL':
         cred = credentials.Certificate(CRED_PATH)
-        firebase_admin.initialize_app(cred, {
-            'databaseURL': DB_URL
-        })
 
     if MODE == 'CLOUD':
         cred = credentials.Certificate(get_secret_manager_credentials())
-        firebase_admin.initialize_app(cred, {
-            'databaseURL': DB_URL
-        })
+
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': DB_URL
+    })
