@@ -83,7 +83,7 @@ def save_coins_data_latest(assets, path):
         try:
             ref.child(asset.symbol).set(json.loads(asset.to_json()))
         except Exception as err:
-            logging.error(f"An error occured in save_coins_data_live {err} for {asset}")
+            logging.error(f"An error occured in save_coins_data_latest {err} for {asset}")
 
 
 def delete_old_data(path, cut_off_time):
