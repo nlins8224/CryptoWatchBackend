@@ -68,18 +68,18 @@ def filter_coins_data(data):
     return assets
 
 
-def save_coins_data(data, path):
+def save_coins_data(assets, path):
     ref = db.reference(path)
-    for asset in data:
+    for asset in assets:
         try:
             ref.child(asset.symbol).child(asset.last_updated).set(json.loads(asset.to_json()))
         except Exception as err:
             logging.error(f"An error occured in save_coins_data {err} for {asset}")
 
 
-def save_coins_data_latest(data, path):
+def save_coins_data_latest(assets, path):
     ref = db.reference(path)
-    for asset in data:
+    for asset in assets:
         try:
             ref.child(asset.symbol).set(json.loads(asset.to_json()))
         except Exception as err:
