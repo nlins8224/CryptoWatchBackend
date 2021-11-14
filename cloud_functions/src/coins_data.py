@@ -86,13 +86,13 @@ def save_coins_data_latest(assets, path):
             logging.error(f"An error occured in save_coins_data_latest {err} for {asset}")
 
 
-def delete_old_data(path, cut_off_time):
+def delete_old_data(path, cut_off_time_ms):
     MS_IN_SECONDS = 1000
     supported_coins = get_supported_coins_sym()
     ref = db.reference(path)
 
-    now = round(time.time() * MS_IN_SECONDS)
-    cutoff = str(now - cut_off_time).split('.', 1)[0]
+    now_ms = round(time.time() * MS_IN_SECONDS)
+    cutoff = str(now_ms - cut_off_time_ms).split('.', 1)[0]
 
     for coin in supported_coins:
         old_items_query = ref.child(coin).order_by_key().end_at(cutoff)
