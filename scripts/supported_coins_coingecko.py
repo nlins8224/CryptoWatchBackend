@@ -1,5 +1,5 @@
-from pycoingecko import CoinGeckoAPI
 from firebase_admin import db
+from pycoingecko import CoinGeckoAPI
 
 cg = CoinGeckoAPI()
 coins = ['bitcoin', 'dogecoin',

@@ -1,5 +1,5 @@
-pycoingecko==2.2.0
-google-cloud-secret-manager==2.8.0
-envyaml==1.9.210927
+pycoingecko>=2.2.0
+google-cloud-secret-manager>=2.8.0
+envyaml>=1.9.210927
 google-cloud-logging>=2.7.0
-firebase-admin==5.1.0
+firebase-admin>=5.1.0
