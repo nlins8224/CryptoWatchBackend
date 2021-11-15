@@ -27,21 +27,22 @@ def parse_historical_coin_data(data, coin_symbol):
         logging.warning(f"Empty data provided in parse_historical_coin_data")
         return None
 
-    prices = data['prices']
-    market_caps = data['market_caps']
-    total_volumes = data['total_volumes']
+    timestamps = [x[0] for x in data['prices']]
+    prices = dict(data['prices'])
+    market_caps = dict(data['market_caps'])
+    total_volumes = dict(data['total_volumes'])
+
     assets = dict()
 
-    for price, market, volume in zip(prices, market_caps, total_volumes):
-        if price[0] == market[0] and market[0] == volume[0]:
-            asset = Asset(
-                symbol=coin_symbol,
-                last_updated=price[0],
-                price=price[1],
-                market_cap=market[1],
-                total_volume=volume[1]
-            )
-            assets[price[0]] = json.loads(asset.to_json())
+    for timestamp in timestamps:
+        asset = Asset(
+            symbol=coin_symbol,
+            last_updated=timestamp,
+            price=prices.get(timestamp),
+            market_cap=market_caps.get(timestamp),
+            total_volume=total_volumes.get(timestamp)
+        )
+        assets[timestamp] = json.loads(asset.to_json())
     return assets
 
 
