@@ -17,8 +17,9 @@ lg_client.setup_logging(log_level=logging.INFO)
 SUPPORTED_COINS = '/supported-coingecko'
 
 
-def get_historical_coin_data(coin, vs_currency, days):
-    return cg.get_coin_market_chart_by_id(id=coin, vs_currency=vs_currency, days=days)
+def get_historical_coin_data(coin, vs_currency, start, end):
+    return cg.get_coin_market_chart_range_by_id(id=coin, vs_currency=vs_currency, from_timestamp=start,
+                                                to_timestamp=end)
 
 
 def parse_historical_coin_data(data, coin_symbol):
@@ -44,7 +45,7 @@ def parse_historical_coin_data(data, coin_symbol):
     return assets
 
 
-def historical_coins_data(currency, days, path):
+def historical_coins_data(currency, path, start, end):
     try:
         coins = get_supported_coins_ids(SUPPORTED_COINS)
         coins_symbols = get_supported_coins_sym(SUPPORTED_COINS)
@@ -54,7 +55,7 @@ def historical_coins_data(currency, days, path):
         for coin in coins:
             coin_symbol = coin_id_symbol_map[coin]
 
-            data = get_historical_coin_data(coin, currency, days)
+            data = get_historical_coin_data(coin, currency, start, end)
             data = parse_historical_coin_data(data, coin_symbol)
             save_historical_coin_data(data, path, coin_symbol)
     except Exception as err:

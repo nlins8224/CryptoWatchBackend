@@ -7,7 +7,7 @@ from google.cloud import logging as cloudlogging
 from pycoingecko import CoinGeckoAPI
 
 from Asset import Asset
-from date_to_millis_UTC import date_to_millis_UTC
+from time_utils import date_to_millis_UTC, get_current_timestamp_ms
 from get_supported_coins import get_supported_coins_ids, get_supported_coins_sym
 
 cg = CoinGeckoAPI()
@@ -74,11 +74,10 @@ def save_coins_data_latest(assets, path):
 
 
 def delete_old_coins_data(path, cut_off_time_ms):
-    MS_IN_SECONDS = 1000
     coins = get_supported_coins_sym(SUPPORTED_COINS)
     ref = db.reference(path)
 
-    now_ms = round(time.time() * MS_IN_SECONDS)
+    now_ms = get_current_timestamp_ms()
     cutoff = str(now_ms - cut_off_time_ms).split('.', 1)[0]
 
     for coin in coins:
