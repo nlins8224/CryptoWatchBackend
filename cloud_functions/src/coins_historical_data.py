@@ -46,6 +46,15 @@ def parse_historical_coin_data(data, coin_symbol):
     return assets
 
 
+def save_historical_coin_data(data, path, coin_symbol):
+    ref = db.reference(path)
+    try:
+        ref.child(coin_symbol).update(data)
+        logging.info(f"Saved {coin_symbol} historical data in {path}/{coin_symbol}")
+    except Exception as err:
+        logging.error(f"An error occured in save_historical_coin_data {err}")
+
+
 def historical_coins_data(currency, path, start, end):
     try:
         coins = get_supported_coins_ids(SUPPORTED_COINS)
@@ -61,12 +70,3 @@ def historical_coins_data(currency, path, start, end):
             save_historical_coin_data(data, path, coin_symbol)
     except Exception as err:
         logging.error(f"An Error occured in get_historical_coins_data {err}")
-
-
-def save_historical_coin_data(data, path, coin_symbol):
-    ref = db.reference(path)
-    try:
-        ref.child(coin_symbol).update(data)
-        logging.info(f"Saved {coin_symbol} historical data in {path}/{coin_symbol}")
-    except Exception as err:
-        logging.error(f"An error occured in save_historical_coin_data {err}")
