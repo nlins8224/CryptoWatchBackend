@@ -133,3 +133,4 @@ dmypy.json
 /terraform/.terraform.lock.hcl
 /cloud_functions/src/app.yaml
 /terraform/.terraform/
+/scripts/env.yaml

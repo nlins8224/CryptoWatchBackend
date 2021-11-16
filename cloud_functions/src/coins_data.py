@@ -1,16 +1,13 @@
 import json
 import logging
-import time
 
 from firebase_admin import db
 from google.cloud import logging as cloudlogging
 from pycoingecko import CoinGeckoAPI
 
 from Asset import Asset
-from config import init_database
-from date_to_millis_UTC import date_to_millis_UTC
-
-init_database()
+from get_supported_coins import get_supported_coins_ids, get_supported_coins_sym
+from time_utils import date_to_millis_UTC, get_current_timestamp_ms
 
 cg = CoinGeckoAPI()
 
@@ -21,29 +18,19 @@ lg_client.setup_logging(log_level=logging.INFO)
 SUPPORTED_COINS = '/supported-coingecko'
 
 
-def get_supported_coins_ids():
-    ref = db.reference(SUPPORTED_COINS)
-    return list(ref.get().values())
-
-
-def get_supported_coins_sym():
-    ref = db.reference(SUPPORTED_COINS)
-    return list(ref.get().keys())
-
-
 def get_coins_data(currency):
     try:
-        supported_coins = get_supported_coins_ids()
+        coins = get_supported_coins_ids(SUPPORTED_COINS)
     except Exception as err:
         logging.error(f"An Error occured in get_market_data {err}")
         return None
 
-    return cg.get_coins_markets(vs_currency=currency, ids=supported_coins)
+    return cg.get_coins_markets(vs_currency=currency, ids=coins)
 
 
-def filter_coins_data(data):
+def parse_coins_data(data):
     if data is None:
-        logging.warning(f"Empty data provided in filter_market_data")
+        logging.warning(f"Empty data provided in parse_coins_data")
         return None
 
     assets = []
@@ -86,14 +73,13 @@ def save_coins_data_latest(assets, path):
 
 
 def delete_old_coins_data(path, cut_off_time_ms):
-    MS_IN_SECONDS = 1000
-    supported_coins = get_supported_coins_sym()
+    coins = get_supported_coins_sym(SUPPORTED_COINS)
     ref = db.reference(path)
 
-    now_ms = round(time.time() * MS_IN_SECONDS)
+    now_ms = get_current_timestamp_ms()
     cutoff = str(now_ms - cut_off_time_ms).split('.', 1)[0]
 
-    for coin in supported_coins:
+    for coin in coins:
         old_items_query = ref.child(coin).order_by_key().end_at(cutoff)
         timestamps = old_items_query.get().keys()
         if timestamps:
