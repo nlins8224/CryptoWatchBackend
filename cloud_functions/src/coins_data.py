@@ -1,14 +1,13 @@
 import json
 import logging
-import time
 
 from firebase_admin import db
 from google.cloud import logging as cloudlogging
 from pycoingecko import CoinGeckoAPI
 
 from Asset import Asset
-from time_utils import date_to_millis_UTC, get_current_timestamp_ms
 from get_supported_coins import get_supported_coins_ids, get_supported_coins_sym
+from time_utils import date_to_millis_UTC, get_current_timestamp_ms
 
 cg = CoinGeckoAPI()
 
@@ -29,9 +28,9 @@ def get_coins_data(currency):
     return cg.get_coins_markets(vs_currency=currency, ids=coins)
 
 
-def filter_coins_data(data):
+def parse_coins_data(data):
     if data is None:
-        logging.warning(f"Empty data provided in filter_coins_data")
+        logging.warning(f"Empty data provided in parse_coins_data")
         return None
 
     assets = []

@@ -13,7 +13,6 @@ def get_current_timestamp_ms():
     return round(time() * MS_IN_SECONDS)
 
 
-def get_today_midnight_timestamp_ms():
+def trim_timestamp_to_midnight(timestamp):
     MS_IN_DAY = 24 * 60 * 60 * 1000
-    timestamp = get_current_timestamp_ms()
     return timestamp - (timestamp % MS_IN_DAY)

@@ -1,22 +1,13 @@
-import json
-
-from coins_data import filter_coins_data
-
-
-def open_coins_data(name):
-    with open(name) as data:
-        return json.load(data)
+from cloud_functions.test.open_coins_data import open_coins_data
+from coins_data import parse_coins_data
 
 
-def filter_market_data_test():
+def parse_coins_data_test():
     data = open_coins_data('resources/coins_data.json')
-    filtered_entry = open_coins_data('resources/filtered_coins_data.json')
+    parsed_entry = open_coins_data('resources/parsed_coins_data.json')
 
-    data = filter_coins_data(data)
+    data = parse_coins_data(data)
     entry = data[0].__dict__
 
-    assert entry == filtered_entry
+    assert entry == parsed_entry
     assert data is not None
-
-
-filter_market_data_test()
