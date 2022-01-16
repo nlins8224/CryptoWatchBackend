@@ -1,4 +1,5 @@
-from coins_data import get_coins_data, parse_coins_data, save_coins_data, save_coins_data_latest, delete_old_coins_data
+from coins_data import get_coins_data, parse_coins_data, save_coins_data, save_coins_data_latest, delete_old_coins_data, \
+    parse_coins_data_minimum
 from coins_historical_data import historical_coins_data
 from config import init_database
 from time_utils import trim_timestamp_to_midnight, get_current_timestamp_ms, get_n_days_ago_s
@@ -32,6 +33,12 @@ def execute_coin_batch_1D(event, context):
     assets = get_coins_data(SUPPORTED_CURRENCY)
     assets = parse_coins_data(assets)
     save_coins_data(assets, HISTORICAL_COINS_1D)
+
+
+def execute_coin_batch_1M_5D_filtered(event, context):
+    assets = get_coins_data(SUPPORTED_CURRENCY)
+    assets = parse_coins_data_minimum(assets)
+    save_coins_data(assets, HISTORICAL_COINS_1M_5D_FILTERED)
 
 
 def execute_coin_historical_batch_1D(event, context):
