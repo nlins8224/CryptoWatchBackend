@@ -7,6 +7,7 @@ SUPPORTED_CURRENCY = 'usd'
 LIVE_COINS = '/live-coins'
 HISTORICAL_COINS_1D = '/historical-coins-1D'
 HISTORICAL_COINS_1M = '/historical-coins-1M'
+HISTORICAL_COINS_1M_FILTERED = '/historical-coins-1M-filtered'
 
 CUT_OFF_TIME_5D_AGO = 5 * 24 * 60 * 60 * 1000
 CUT_OFF_TIME_5Y_AGO = 5 * 365 * 24 * 60 * 60 * 1000

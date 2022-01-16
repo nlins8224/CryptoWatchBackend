@@ -54,6 +54,24 @@ def parse_coins_data(data):
     return assets
 
 
+def parse_coins_data_minimum(data):
+    if data is None:
+        logging.warning(f"Empty data provided in parse_coins_data")
+        return None
+
+    assets = []
+    for entry in data:
+        asset = Asset(
+            symbol=entry['symbol'],
+            last_updated=str(date_to_millis_UTC(entry['last_updated'])),
+            price=entry['current_price'],
+            market_cap=entry['market_cap'],
+            total_volume=entry['total_volume']
+        )
+        assets.append(asset)
+    return assets
+
+
 def save_coins_data(assets, path):
     ref = db.reference(path)
     for asset in assets:
