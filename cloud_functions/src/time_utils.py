@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from time import time
 
 
@@ -16,3 +16,8 @@ def get_current_timestamp_ms():
 def trim_timestamp_to_midnight(timestamp):
     MS_IN_DAY = 24 * 60 * 60 * 1000
     return timestamp - (timestamp % MS_IN_DAY)
+
+
+def get_n_days_ago_s(days_ago):
+    date = datetime.now().replace(microsecond=0) - timedelta(days=days_ago)
+    return int(date.timestamp())
