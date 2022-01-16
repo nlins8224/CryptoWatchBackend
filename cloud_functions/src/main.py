@@ -47,5 +47,9 @@ def execute_delete_old_coins_data_5D(event, context):
     delete_old_coins_data(HISTORICAL_COINS_1M, CUT_OFF_TIME_5D_AGO)
 
 
+def execute_delete_old_coins_data_5D_filtered(event, context):
+    delete_old_coins_data(HISTORICAL_COINS_1M_5D_FILTERED, CUT_OFF_TIME_5D_AGO)
+
+
 def execute_delete_old_coins_data_5Y(event, context):
     delete_old_coins_data(HISTORICAL_COINS_1D, CUT_OFF_TIME_5Y_AGO)
