@@ -66,6 +66,7 @@ def historical_coins_data(currency, path, start, end):
 
             data = get_historical_coin_data(coin, currency, start, end)
             data = parse_historical_coin_data(data, coin_symbol)
+            print(data)
             save_historical_coin_data(data, path, coin_symbol)
     except Exception as err:
         logging.error(f"An Error occured in get_historical_coins_data {err}")

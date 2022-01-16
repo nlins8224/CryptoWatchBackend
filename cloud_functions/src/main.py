@@ -7,7 +7,7 @@ SUPPORTED_CURRENCY = 'usd'
 LIVE_COINS = '/live-coins'
 HISTORICAL_COINS_1D = '/historical-coins-1D'
 HISTORICAL_COINS_1M = '/historical-coins-1M'
-HISTORICAL_COINS_1M_FILTERED = '/historical-coins-1M-filtered'
+HISTORICAL_COINS_1M_5D_FILTERED = '/historical-coins-1M-5D-filtered'
 
 CUT_OFF_TIME_5D_AGO = 5 * 24 * 60 * 60 * 1000
 CUT_OFF_TIME_5Y_AGO = 5 * 365 * 24 * 60 * 60 * 1000
@@ -36,6 +36,11 @@ def execute_coin_batch_1D(event, context):
 
 def execute_coin_historical_batch_1D(event, context):
     historical_coins_data(SUPPORTED_CURRENCY, HISTORICAL_COINS_1D, START_S_5Y_AGO, END_S)
+
+
+def execute_coin_1M_5D_filtered_batch(event, context):
+    historical_coins_data(SUPPORTED_CURRENCY, HISTORICAL_COINS_1M_5D_FILTERED, START_S_5D_AGO,
+                          CURRENT_TIMESTAMP // MS_IN_SECOND)
 
 
 def execute_delete_old_coins_data_5D(event, context):
