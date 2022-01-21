@@ -6,9 +6,9 @@ from time_utils import trim_timestamp_to_midnight, get_current_timestamp_ms, get
 
 SUPPORTED_CURRENCY = 'usd'
 LIVE_COINS = '/live-coins'
-HISTORICAL_COINS_1D = '/historical-coins-1D'
-HISTORICAL_COINS_1M = '/historical-coins-1M'
-HISTORICAL_COINS_1M_5D_FILTERED = '/historical-coins-1M-5D-filtered'
+HISTORICAL_COINS_1D_PATH = '/historical-coins-1D'
+HISTORICAL_COINS_1M_PATH = '/historical-coins-1M'
+HISTORICAL_COINS_1M_5D_FILTERED_PATH = '/historical-coins-1M-5D-filtered'
 
 CUT_OFF_TIME_5D_AGO = 5 * 24 * 60 * 60 * 1000
 CUT_OFF_TIME_5Y_AGO = 5 * 365 * 24 * 60 * 60 * 1000
@@ -26,37 +26,37 @@ def execute_coin_batch_1M(event, context):
     assets = get_coins_data(SUPPORTED_CURRENCY)
     assets = parse_coins_data(assets)
     save_coins_data_latest(assets, LIVE_COINS)
-    save_coins_data(assets, HISTORICAL_COINS_1M)
+    save_coins_data(assets, HISTORICAL_COINS_1M_PATH)
 
 
 def execute_coin_batch_1D(event, context):
     assets = get_coins_data(SUPPORTED_CURRENCY)
     assets = parse_coins_data(assets)
-    save_coins_data(assets, HISTORICAL_COINS_1D)
+    save_coins_data(assets, HISTORICAL_COINS_1D_PATH)
 
 
 def execute_coin_batch_1M_5D_filtered(event, context):
     assets = get_coins_data(SUPPORTED_CURRENCY)
     assets = parse_coins_data_minimum(assets)
-    save_coins_data(assets, HISTORICAL_COINS_1M_5D_FILTERED)
+    save_coins_data(assets, HISTORICAL_COINS_1M_5D_FILTERED_PATH)
 
 
 def execute_coin_historical_batch_1D(event, context):
-    historical_coins_data(SUPPORTED_CURRENCY, HISTORICAL_COINS_1D, START_S_5Y_AGO, END_S)
+    historical_coins_data(SUPPORTED_CURRENCY, HISTORICAL_COINS_1D_PATH, START_S_5Y_AGO, END_S)
 
 
-def execute_coin_1M_5D_filtered_batch(event, context):
-    historical_coins_data(SUPPORTED_CURRENCY, HISTORICAL_COINS_1M_5D_FILTERED, START_S_5D_AGO,
+def execute_coin_historical_1M_5D_filtered_batch(event, context):
+    historical_coins_data(SUPPORTED_CURRENCY, HISTORICAL_COINS_1M_5D_FILTERED_PATH, START_S_5D_AGO,
                           CURRENT_TIMESTAMP // MS_IN_SECOND)
 
 
 def execute_delete_old_coins_data_5D(event, context):
-    delete_old_coins_data(HISTORICAL_COINS_1M, CUT_OFF_TIME_5D_AGO)
+    delete_old_coins_data(HISTORICAL_COINS_1M_PATH, CUT_OFF_TIME_5D_AGO)
 
 
 def execute_delete_old_coins_data_5D_filtered(event, context):
-    delete_old_coins_data(HISTORICAL_COINS_1M_5D_FILTERED, CUT_OFF_TIME_5D_AGO)
+    delete_old_coins_data(HISTORICAL_COINS_1M_5D_FILTERED_PATH, CUT_OFF_TIME_5D_AGO)
 
 
 def execute_delete_old_coins_data_5Y(event, context):
-    delete_old_coins_data(HISTORICAL_COINS_1D, CUT_OFF_TIME_5Y_AGO)
+    delete_old_coins_data(HISTORICAL_COINS_1D_PATH, CUT_OFF_TIME_5Y_AGO)
