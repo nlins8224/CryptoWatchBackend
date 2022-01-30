@@ -2,7 +2,21 @@ from coins_data import get_coins_data, parse_coins_data, save_coins_data, save_c
     parse_coins_data_minimum
 from coins_historical_data import historical_coins_data
 from config import init_database
+from supported_coins import save_supported_coins
 from time_utils import trim_timestamp_to_midnight, get_current_timestamp_ms, get_n_days_ago_s
+
+coins = ['bitcoin', 'dogecoin',
+         'binancecoin', 'cardano',
+         'ethereum', 'solana',
+         'ripple', 'tether',
+         'usd-coin', 'polkadot',
+         'uniswap', 'chainlink',
+         'litecoin', 'stellar',
+         'cosmos', 'crypto-com-chain',
+         'eos', 'tron',
+         'monero', 'iota',
+         'nem'
+         ]
 
 SUPPORTED_CURRENCY = 'usd'
 LIVE_COINS = '/live-coins'
@@ -60,3 +74,7 @@ def execute_delete_old_coins_data_5D_filtered(event, context):
 
 def execute_delete_old_coins_data_5Y(event, context):
     delete_old_coins_data(HISTORICAL_COINS_1D_PATH, CUT_OFF_TIME_5Y_AGO)
+
+
+def execute_save_supported_coins_coingecko(event, context):
+    save_supported_coins(coins)

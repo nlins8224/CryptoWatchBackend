@@ -5,7 +5,7 @@ from bfxapi import Client
 from envyaml import EnvYAML
 
 from config import init_database
-from get_supported_coins import get_supported_coins_ids, get_supported_coins_sym
+from supported_coins import get_supported_coins_ids, get_supported_coins_sym
 
 env = EnvYAML('env.yaml')
 

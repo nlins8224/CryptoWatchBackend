@@ -6,7 +6,7 @@ from google.cloud import logging as cloudlogging
 from pycoingecko import CoinGeckoAPI
 
 from Asset import Asset
-from get_supported_coins import get_supported_coins_ids, get_supported_coins_sym
+from supported_coins import get_supported_coins_ids, get_supported_coins_sym
 
 cg = CoinGeckoAPI()
 
