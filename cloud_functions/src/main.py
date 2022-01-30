@@ -30,7 +30,7 @@ CUT_OFF_TIME_5Y_AGO = 5 * 365 * 24 * 60 * 60 * 1000
 MS_IN_SECOND = 1000
 CURRENT_TIMESTAMP = get_current_timestamp_ms()
 # GMT 2015-01-01 00:00:00
-START_S_5Y_AGO = 1420070400
+START_S_YEAR_2015 = 1420070400
 START_S_5D_AGO = get_n_days_ago_s(5)
 END_S = trim_timestamp_to_midnight(CURRENT_TIMESTAMP) // MS_IN_SECOND
 init_database()
@@ -56,7 +56,7 @@ def execute_coin_batch_1M_5D_filtered(event, context):
 
 
 def execute_coin_historical_batch_1D(event, context):
-    historical_coins_data(SUPPORTED_CURRENCY, HISTORICAL_COINS_1D_PATH, START_S_5Y_AGO, END_S)
+    historical_coins_data(SUPPORTED_CURRENCY, HISTORICAL_COINS_1D_PATH, START_S_YEAR_2015, END_S)
 
 
 def execute_coin_historical_1M_5D_filtered_batch(event, context):
