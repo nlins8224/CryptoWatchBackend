@@ -1,9 +1,9 @@
-from coins_data import get_coins_data, parse_coins_data, save_coins_data, save_coins_data_latest, delete_old_coins_data, \
+from cloud_functions.src.coins_data import get_coins_data, parse_coins_data, save_coins_data, save_coins_data_latest, delete_old_coins_data, \
     parse_coins_data_minimum
-from coins_historical_data import historical_coins_data
-from config import init_database
-from supported_coins import save_supported_coins
-from time_utils import trim_timestamp_to_midnight, get_current_timestamp_ms, get_n_days_ago_s
+from cloud_functions.src.coins_historical_data import historical_coins_data
+from cloud_functions.src.config import init_database
+from cloud_functions.src.supported_coins import save_supported_coins
+from cloud_functions.src.time_utils import trim_timestamp_to_midnight, get_current_timestamp_ms, get_n_days_ago_s
 
 coins = ['bitcoin', 'dogecoin',
          'binancecoin', 'cardano',

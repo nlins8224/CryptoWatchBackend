@@ -1,5 +1,5 @@
 from cloud_functions.test.open_coins_data import open_coins_data
-from coins_data import parse_coins_data
+from cloud_functions.src.coins_data import parse_coins_data
 
 
 def parse_coins_data_test():

@@ -5,8 +5,8 @@ from firebase_admin import db
 from google.cloud import logging as cloudlogging
 from pycoingecko import CoinGeckoAPI
 
-from Asset import Asset
-from supported_coins import get_supported_coins_ids, get_supported_coins_sym
+from cloud_functions.src.Asset import Asset
+from cloud_functions.src.supported_coins import get_supported_coins_ids, get_supported_coins_sym
 
 cg = CoinGeckoAPI()
 

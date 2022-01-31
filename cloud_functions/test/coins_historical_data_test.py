@@ -1,7 +1,7 @@
 import json
 
 from cloud_functions.test.open_coins_data import open_coins_data
-from coins_historical_data import parse_historical_coin_data
+from cloud_functions.src.coins_historical_data import parse_historical_coin_data
 
 
 def parse_historical_coin_data_test():
