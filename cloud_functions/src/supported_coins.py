@@ -14,3 +14,8 @@ def get_supported_coins_ids(path):
 def get_supported_coins_sym(path):
     ref = db.reference(path)
     return list(ref.get().keys())
+
+
+def save_supported_coins(supported_coins):
+    ref = db.reference('supported-coingecko')
+    ref.set(supported_coins)

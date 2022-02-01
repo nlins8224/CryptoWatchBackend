@@ -5,8 +5,8 @@ from firebase_admin import db
 from google.cloud import logging as cloudlogging
 from pycoingecko import CoinGeckoAPI
 
-from Asset import Asset
-from get_supported_coins import get_supported_coins_ids, get_supported_coins_sym
+from cloud_functions.src.Asset import Asset
+from cloud_functions.src.supported_coins import get_supported_coins_ids, get_supported_coins_sym
 
 cg = CoinGeckoAPI()
 
@@ -66,6 +66,7 @@ def historical_coins_data(currency, path, start, end):
 
             data = get_historical_coin_data(coin, currency, start, end)
             data = parse_historical_coin_data(data, coin_symbol)
+            print(data)
             save_historical_coin_data(data, path, coin_symbol)
     except Exception as err:
         logging.error(f"An Error occured in get_historical_coins_data {err}")

@@ -5,9 +5,9 @@ from firebase_admin import db
 from google.cloud import logging as cloudlogging
 from pycoingecko import CoinGeckoAPI
 
-from Asset import Asset
-from get_supported_coins import get_supported_coins_ids, get_supported_coins_sym
-from time_utils import date_to_millis_UTC, get_current_timestamp_ms
+from cloud_functions.src.Asset import Asset
+from cloud_functions.src.supported_coins import get_supported_coins_ids, get_supported_coins_sym
+from cloud_functions.src.time_utils import date_to_millis_UTC, get_current_timestamp_ms
 
 cg = CoinGeckoAPI()
 
@@ -49,6 +49,24 @@ def parse_coins_data(data):
             entry['price_change_percentage_24h'],
             entry['market_cap_change_24h'],
             str(date_to_millis_UTC(entry['last_updated'])),
+        )
+        assets.append(asset)
+    return assets
+
+
+def parse_coins_data_minimum(data):
+    if data is None:
+        logging.warning(f"Empty data provided in parse_coins_data")
+        return None
+
+    assets = []
+    for entry in data:
+        asset = Asset(
+            symbol=entry['symbol'],
+            last_updated=str(date_to_millis_UTC(entry['last_updated'])),
+            price=entry['current_price'],
+            market_cap=entry['market_cap'],
+            total_volume=entry['total_volume']
         )
         assets.append(asset)
     return assets

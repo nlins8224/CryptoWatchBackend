@@ -2,7 +2,7 @@ from datetime import datetime
 
 from freezegun import freeze_time
 
-from time_utils import date_to_millis_UTC, get_current_timestamp_ms, trim_timestamp_to_midnight
+import cloud_functions.src.time_utils as time_utils
 
 
 def date_to_millis_UTC_test():
@@ -11,8 +11,8 @@ def date_to_millis_UTC_test():
     timestamp_1 = 1636497995211
     timestamp_2 = 1636497995000
 
-    millis_1 = date_to_millis_UTC(date_1)
-    millis_2 = date_to_millis_UTC(date_2)
+    millis_1 = time_utils.date_to_millis_UTC(date_1)
+    millis_2 = time_utils.date_to_millis_UTC(date_2)
 
     assert millis_1 == timestamp_1
     assert millis_2 == timestamp_2
@@ -23,7 +23,7 @@ def get_current_timestamp_ms_test():
     MS_IN_SECONDS = 1000
     now_ms = int(datetime.utcnow().timestamp() * MS_IN_SECONDS)
 
-    timestamp = get_current_timestamp_ms()
+    timestamp = time_utils.get_current_timestamp_ms()
 
     assert timestamp == now_ms
 
@@ -34,6 +34,6 @@ def trim_timestamp_to_midnight_test():
     timestamp = int(datetime.utcnow().timestamp() * MS_IN_SECONDS)
     trimmed_timestamp = 1586044800000  # 2020-04-05 00:00:00
 
-    timestamp = trim_timestamp_to_midnight(timestamp)
+    timestamp = time_utils.trim_timestamp_to_midnight(timestamp)
 
     assert timestamp == trimmed_timestamp
