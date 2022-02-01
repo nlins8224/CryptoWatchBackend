@@ -1,0 +1,15 @@
+# This is an example with fake data only.
+
+env_variables:
+  # structure: https://<project_ID>-<database_type>.<region>.firebasedatabase.app
+  DB_URL: "https://abcd-x222-default-rtdb.europe-east1.firebasedatabase.app"
+  # structure: <path>/google_credentials.json
+  CRED_PATH: "/home/user/project/google_credentials.json"
+  # structure: <project_ID>
+  PROJECT_ID: "abcd-x222"
+  # structure: <string>
+  SECRET_ID: "abcd_dcef_1a"
+  #structure: <string>
+  API_KEY: 'kaaWdsavM5s4cxzw4gwszdszaflXB0uiziMOWsx'
+  #structure: <string>
+  API_SECRET: 'v8IovpZ3ZFSW1PnXjumc4VQP8ZWfxzycUJZWwSXKPuk'
