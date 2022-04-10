@@ -10,7 +10,7 @@ This repository contains pipeline which updates prices and data approximately ev
 It does so through several parallel functions that write data to the database periodically.
 
 
-Technology Stack: Python3, Google Cloud Platform (Cloud Functions, Cloud Scheduler), Realtime Database
+Technology Stack: Python3, Coingecko API, Google Cloud Platform (Cloud Functions, Cloud Scheduler), Realtime Database
 
 This repository contains backend code only, click [here](https://github.com/nlins8224/CryptoWatchFrontend) to navigate to 
 frontend repository.
